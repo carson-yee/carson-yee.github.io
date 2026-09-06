@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Field Photography | Carson Yee</title>
+  <title>Projects | Carson Yee</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
     <div class="nav-container">
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="projects.html">Projects</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
         <li><a href="research.html">Research</a></li>
         <li><a href="experience.html">Experience</a></li>
       </ul>
@@ -21,13 +21,33 @@
 
   <main class="section-band section-cream" style="flex: 1;">
     <div class="content-wrap">
-      <h1 class="page-title">Field Photography</h1>
-      <p class="section-sub" style="text-align: left; margin-bottom: 36px;">Sierra Nevada routes and backcountry terrain.</p>
-      
-      <div class="gallery-grid">
-        <img src="assets/nature1.jpg" alt="Sierra Landscape" class="gallery-item" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' fill=\'%23dfd7c7\'><rect width=\'100%25\' height=\'100%25\'/></svg>'">
-        <img src="assets/nature2.jpg" alt="Mountain Pass" class="gallery-item" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' fill=\'%23dfd7c7\'><rect width=\'100%25\' height=\'100%25\'/></svg>'">
-        <img src="assets/nature3.jpg" alt="Granite Ridge" class="gallery-item" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' fill=\'%23dfd7c7\'><rect width=\'100%25\' height=\'100%25\'/></svg>'">
+      <h1 class="page-title">Technical Projects</h1>
+      <p class="section-sub" style="text-align: left; margin-bottom: 36px;">Applied hardware, embedded devices, and prototypes. Select any build for full documentation.</p>
+
+      <div class="project-grid">
+        <a href="project-detail.html" class="project-card">
+          <img src="assets/project1.jpg" alt="Underwater ROV Gripper" class="project-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' fill=\'%23dfd7c7\'><rect width=\'100%25\' height=\'100%25\'/></svg>'">
+          <div class="project-overlay">
+            <h3>Subsea Gripper Mechanism</h3>
+            <p>Linkage mechanics and actuator waterproofing for underwater manipulation tasks.</p>
+          </div>
+        </a>
+
+        <a href="project-detail.html" class="project-card">
+          <img src="assets/project2.jpg" alt="Embedded Sensor Node" class="project-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' fill=\'%23dfd7c7\'><rect width=\'100%25\' height=\'100%25\'/></svg>'">
+          <div class="project-overlay">
+            <h3>Embedded Telemetry Node</h3>
+            <p>Custom PCB design with low-power sleep modes and SPI flash logging.</p>
+          </div>
+        </a>
+
+        <a href="project-detail.html" class="project-card">
+          <img src="assets/project3.jpg" alt="Electromechanical Prototype" class="project-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' fill=\'%23dfd7c7\'><rect width=\'100%25\' height=\'100%25\'/></svg>'">
+          <div class="project-overlay">
+            <h3>Electromechanical Actuation</h3>
+            <p>Microcontroller-driven interactive system with stepper control and sensor feedback.</p>
+          </div>
+        </a>
       </div>
     </div>
   </main>
