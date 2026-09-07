@@ -29,7 +29,7 @@ body {
   font-size: 1.15rem;
 }
 
-/* Header & Flexbox Navigation */
+/* Header and 3-Part Flexbox Navigation */
 header {
   background-color: var(--header-bg);
   width: 100%;
@@ -68,16 +68,16 @@ header {
   justify-content: center;
 }
 
-.dragon-icon {
-  width: 68px;
-  height: 28px;
+.tree-icon {
+  height: 26px;
+  width: auto;
   display: block;
   color: var(--cardinal);
   transition: transform 0.25s ease, color 0.25s ease;
 }
 
-.dragon-icon:hover {
-  transform: scale(1.1);
+.tree-icon:hover {
+  transform: scale(1.12);
   color: #b82323;
 }
 
@@ -117,7 +117,7 @@ header {
   width: 100%;
 }
 
-/* Layout Bands */
+/* Section Containers */
 .section-band {
   width: 100%;
   padding: 72px 24px;
@@ -138,7 +138,7 @@ header {
   margin: 0 auto;
 }
 
-/* Typography */
+/* Page Titles and Headings */
 .page-title {
   font-size: 3.2rem;
   font-weight: 600;
@@ -290,7 +290,7 @@ header {
   font-weight: 600;
 }
 
-/* Video Container for Speech Page */
+/* Video Frame Container for Speech Page */
 .video-container {
   position: relative;
   padding-bottom: 56.25%;
@@ -375,7 +375,7 @@ header {
   line-height: 1.45;
 }
 
-/* Research Entries */
+/* Research Publications and Presentations */
 .pub-entry {
   display: flex;
   justify-content: space-between;
@@ -425,7 +425,7 @@ header {
   background-color: var(--bg-light);
 }
 
-/* Standard Buttons */
+/* Buttons */
 .btn {
   display: inline-block;
   padding: 8px 20px;
@@ -443,7 +443,7 @@ header {
   opacity: 0.88;
 }
 
-/* Experience Entries */
+/* Experience and Service Entries */
 .exp-entry {
   margin-bottom: 36px;
 }
@@ -484,7 +484,7 @@ header {
   margin-bottom: 6px;
 }
 
-/* Secret Photography Grid */
+/* Secret Gallery Grid */
 .secret-wrap {
   width: 100%;
   max-width: 1300px;
@@ -541,7 +541,7 @@ footer {
   fill: currentColor;
 }
 
-/* Responsive Layout */
+/* Responsive Rules */
 @media (max-width: 768px) {
   .nav-container {
     padding: 0 20px;
