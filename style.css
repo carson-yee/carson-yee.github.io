@@ -62,23 +62,26 @@ header {
 }
 
 .nav-center {
-  flex: 0 0 auto;
+  flex: 0 0 28px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 28px;
+  height: 28px;
 }
 
 .tree-icon {
-  height: 26px;
-  width: auto;
+  width: 28px;
+  height: 28px;
   display: block;
+  fill: var(--cardinal);
   color: var(--cardinal);
-  transition: transform 0.25s ease, color 0.25s ease;
+  transition: transform 0.25s ease, fill 0.25s ease;
 }
 
 .tree-icon:hover {
   transform: scale(1.12);
-  color: #b82323;
+  fill: #b82323;
 }
 
 .nav-links {
@@ -290,7 +293,7 @@ header {
   font-weight: 600;
 }
 
-/* Video Frame Container for Speech Page */
+/* Video Container for Speech Page */
 .video-container {
   position: relative;
   padding-bottom: 56.25%;
@@ -375,7 +378,7 @@ header {
   line-height: 1.45;
 }
 
-/* Research Publications and Presentations */
+/* Research Entries */
 .pub-entry {
   display: flex;
   justify-content: space-between;
@@ -443,7 +446,7 @@ header {
   opacity: 0.88;
 }
 
-/* Experience and Service Entries */
+/* Experience Entries */
 .exp-entry {
   margin-bottom: 36px;
 }
@@ -551,6 +554,9 @@ footer {
   }
   .nav-brand {
     text-align: center;
+  }
+  .nav-center {
+    margin: 0 auto;
   }
   .nav-links {
     justify-content: center;
