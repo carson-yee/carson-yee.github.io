@@ -258,7 +258,7 @@ header {
   flex-grow: 1;
 }
 
-/* Featured Thumbnail: uncropped contain with neutral backing */
+/* Featured Thumbnail: Uncropped Contain with Neutral Background */
 .card-thumb {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -336,14 +336,14 @@ header {
   text-decoration: none;
 }
 
-/* Project catalog image: uncropped contain inside dark frame */
+/* Project Catalog Image: Uncropped Contain Inside Frame */
 .project-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  background-color: #181513;
+  background-color: #141110;
   display: block;
-  padding: 10px;
+  padding: 12px;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
@@ -383,21 +383,24 @@ header {
   line-height: 1.45;
 }
 
-/* Technical Project Detail Galleries (CAD Models, Prototypes, Schematics) */
+/* Technical Project Detail Galleries: Dynamic Height Without Cropping */
 .content-wrap .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 28px;
+  align-items: start;
 }
 
 .content-wrap .gallery-item {
   width: 100%;
-  height: 340px;
+  height: auto;
+  max-height: 420px;
   object-fit: contain;
   background-color: var(--bg-light);
   border-radius: 3px;
   border: 1px solid var(--border);
-  padding: 12px;
+  padding: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
 
 /* Research Entries */
@@ -439,7 +442,7 @@ header {
   margin-bottom: 16px;
 }
 
-/* Research publication cover: uncropped contain */
+/* Research Publication Cover: Uncropped Contain */
 .pub-cover {
   width: 190px;
   min-width: 190px;
@@ -511,7 +514,7 @@ header {
   margin-bottom: 6px;
 }
 
-/* Secret Gallery Grid (Wilderness Photography: Uniform Crop) */
+/* Secret Gallery Grid: Uniform Photo Grid */
 .secret-wrap {
   width: 100%;
   max-width: 1300px;
