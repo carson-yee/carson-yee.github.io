@@ -185,16 +185,18 @@ header {
 .hero-image-wrap {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
+/* Portrait with feathered gradient edges dissolving into the cream background */
 .hero-img {
   width: 100%;
   max-width: 440px;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  display: block;
+  -webkit-mask-image: radial-gradient(ellipse 80% 82% at 50% 50%, black 52%, transparent 98%);
+  mask-image: radial-gradient(ellipse 80% 82% at 50% 50%, black 52%, transparent 98%);
 }
 
 /* Featured Links Cards (index.html) */
@@ -258,16 +260,15 @@ header {
   flex-grow: 1;
 }
 
-/* Featured Preview Thumbnail: uncropped contain */
+/* Featured Preview Thumbnail: 16:10 */
 .card-thumb {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
   border-radius: 2px;
   border: 1px solid var(--border);
   display: block;
   background-color: var(--bg-light);
-  padding: 8px;
 }
 
 /* Quote Section */
@@ -318,7 +319,7 @@ header {
   border: 0;
 }
 
-/* Projects Catalog: Two Columns Max (projects.html) */
+/* Projects Catalog: Two Columns (projects.html) */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -336,14 +337,11 @@ header {
   text-decoration: none;
 }
 
-/* Project catalog image: contained inside frame */
 .project-img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  background-color: #141110;
+  object-fit: cover;
   display: block;
-  padding: 12px;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
@@ -383,27 +381,27 @@ header {
   line-height: 1.45;
 }
 
-/* Global Gallery Grid: Used by Technical Detail Pages (CAD, Schematics, Mechanisms) */
+/* Project Detail Pages Gallery Grid: Exactly 3 Items at 16:10 */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
   align-items: center;
 }
 
-/* Base Gallery Item: uncropped contain with neutral light background */
 .gallery-item {
   width: 100%;
-  height: 340px;
-  object-fit: contain !important;
+  aspect-ratio: 16 / 10;
+  height: auto;
+  object-fit: cover;
   background-color: var(--bg-light);
   border-radius: 3px;
   border: 1px solid var(--border);
-  padding: 10px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  display: block;
 }
 
-/* Secret Gallery Override: Landscape photography fills the container */
+/* Secret Gallery Override (Untouched) */
 .secret-wrap {
   width: 100%;
   max-width: 1300px;
@@ -420,6 +418,7 @@ header {
 .secret-wrap .gallery-item {
   width: 100%;
   height: 320px;
+  aspect-ratio: auto;
   object-fit: cover !important;
   background-color: transparent;
   border-radius: 3px;
@@ -432,7 +431,7 @@ header {
 .pub-entry {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 36px;
   margin-bottom: 44px;
   padding-bottom: 36px;
@@ -467,17 +466,30 @@ header {
   margin-bottom: 16px;
 }
 
-/* Research publication cover: uncropped contain */
-.pub-cover {
-  width: 190px;
-  min-width: 190px;
-  aspect-ratio: 3 / 4;
-  object-fit: contain;
+/* Document Cover: Exact 816 x 1061 ratio */
+.pub-cover-doc {
+  width: 195px;
+  min-width: 195px;
+  aspect-ratio: 816 / 1061;
+  object-fit: cover;
   border: 1px solid var(--border);
   border-radius: 2px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   background-color: var(--bg-light);
-  padding: 4px;
+  display: block;
+}
+
+/* Landscape Research Thumbnail: 16:10 */
+.pub-cover-landscape {
+  width: 320px;
+  min-width: 320px;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  background-color: var(--bg-light);
+  display: block;
 }
 
 /* Buttons */
@@ -596,11 +608,8 @@ footer {
     grid-template-columns: 1fr;
     gap: 36px;
   }
-  .hero-image-wrap {
-    order: -1;
-  }
   .hero-img {
-    max-width: 300px;
+    max-width: 320px;
   }
   .page-title {
     font-size: 2.5rem;
@@ -609,13 +618,18 @@ footer {
   .project-grid {
     grid-template-columns: 1fr;
   }
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
   .pub-entry {
     flex-direction: column-reverse;
     gap: 20px;
+    align-items: flex-start;
   }
-  .pub-cover {
+  .pub-cover-doc, .pub-cover-landscape {
     width: 100%;
-    max-width: 240px;
+    max-width: 300px;
+    min-width: unset;
   }
   .quote-text {
     font-size: 1.7rem;
