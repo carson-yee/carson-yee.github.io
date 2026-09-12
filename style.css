@@ -188,7 +188,7 @@ header {
   align-items: center;
 }
 
-/* Portrait with feathered edges blending into the cream background */
+/* Portrait with feathered edges blending into background */
 .hero-img {
   width: 100%;
   max-width: 420px;
@@ -263,7 +263,6 @@ header {
   flex-grow: 1;
 }
 
-/* Featured Preview Thumbnail: 16:10 with zero letterbox padding */
 .card-thumb {
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -300,7 +299,7 @@ header {
   font-weight: 600;
 }
 
-/* Video Container for Speech Page */
+/* Video Container */
 .video-container {
   position: relative;
   padding-bottom: 56.25%;
@@ -323,7 +322,7 @@ header {
   border: 0;
 }
 
-/* Projects Catalog: Two Columns (projects.html) */
+/* Projects Catalog: Two Columns */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -386,7 +385,7 @@ header {
   line-height: 1.45;
 }
 
-/* Project Detail Pages Gallery Grid: Exactly 3 Columns at 16:10 */
+/* Project Detail Pages: Three Columns at 16:10 */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -407,7 +406,7 @@ header {
   display: block;
 }
 
-/* Secret Gallery Override (Preserved) */
+/* Secret Gallery Override */
 .secret-wrap {
   width: 100%;
   max-width: 1300px;
@@ -433,14 +432,14 @@ header {
   box-shadow: none;
 }
 
-/* Research Entries */
+/* Research Grid: Fixed 2-Column Split to lock text and image centerlines */
 .pub-entry {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 36px;
-  margin-bottom: 44px;
-  padding-bottom: 36px;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 48px;
+  padding-bottom: 48px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -449,7 +448,7 @@ header {
 }
 
 .pub-content {
-  flex: 1;
+  width: 100%;
 }
 
 .pub-title {
@@ -472,10 +471,17 @@ header {
   margin-bottom: 16px;
 }
 
-/* Document Cover: Proportional to 816 x 1061 */
+/* Common Media Wrapper to Align Vertical Centerline */
+.pub-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Document Cover: 816 x 1061 ratio */
 .pub-cover-doc {
-  width: 175px;
-  min-width: 175px;
+  width: 180px;
   aspect-ratio: 816 / 1061;
   object-fit: cover;
   border: 1px solid var(--border);
@@ -483,13 +489,11 @@ header {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   background-color: transparent;
   display: block;
-  flex-shrink: 0;
 }
 
-/* Landscape Research Thumbnail: 16:10 */
+/* Landscape Poster: 16:10 ratio, aligned to same center */
 .pub-cover-chem {
-  width: 240px;
-  min-width: 240px;
+  width: 280px;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   border: 1px solid var(--border);
@@ -497,7 +501,6 @@ header {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   background-color: transparent;
   display: block;
-  flex-shrink: 0;
 }
 
 /* Buttons */
@@ -518,7 +521,7 @@ header {
   opacity: 0.88;
 }
 
-/* Experience Entries */
+/* Experience */
 .exp-entry {
   margin-bottom: 36px;
 }
@@ -594,7 +597,7 @@ footer {
   fill: currentColor;
 }
 
-/* Responsive Rules */
+/* Responsive */
 @media (max-width: 768px) {
   .nav-container {
     padding: 0 20px;
@@ -630,17 +633,17 @@ footer {
     grid-template-columns: 1fr;
   }
   .pub-entry {
-    flex-direction: column-reverse;
-    gap: 20px;
-    align-items: flex-start;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .pub-media {
+    justify-content: flex-start;
   }
   .pub-cover-doc {
     width: 160px;
-    min-width: unset;
   }
   .pub-cover-chem {
-    width: 220px;
-    min-width: unset;
+    width: 240px;
   }
   .quote-text {
     font-size: 1.7rem;
