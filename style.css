@@ -188,7 +188,6 @@ header {
   align-items: center;
 }
 
-/* Portrait with feathered edges blending into background */
 .hero-img {
   width: 100%;
   max-width: 420px;
@@ -322,7 +321,7 @@ header {
   border: 0;
 }
 
-/* Projects Catalog: Two Columns */
+/* Projects Catalog */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -385,7 +384,7 @@ header {
   line-height: 1.45;
 }
 
-/* Project Detail Pages: Three Columns at 16:10 */
+/* Project Detail Galleries */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -432,11 +431,11 @@ header {
   box-shadow: none;
 }
 
-/* Research Grid: Fixed 2-Column Split to lock text and image centerlines */
+/* Research Entries: Rigid 2-Column Grid */
 .pub-entry {
   display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 40px;
+  grid-template-columns: 1fr 300px;
+  column-gap: 48px;
   align-items: center;
   margin-bottom: 48px;
   padding-bottom: 48px;
@@ -471,15 +470,15 @@ header {
   margin-bottom: 16px;
 }
 
-/* Common Media Wrapper to Align Vertical Centerline */
+/* Common 300px Wrapper: Centers both images on the exact same vertical line */
 .pub-media {
+  width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
-/* Document Cover: 816 x 1061 ratio */
+/* Document Cover: Proportional to 816 x 1061 */
 .pub-cover-doc {
   width: 180px;
   aspect-ratio: 816 / 1061;
@@ -491,7 +490,7 @@ header {
   display: block;
 }
 
-/* Landscape Poster: 16:10 ratio, aligned to same center */
+/* Landscape Chemistry Poster: 16:10 ratio */
 .pub-cover-chem {
   width: 280px;
   aspect-ratio: 16 / 10;
@@ -521,7 +520,7 @@ header {
   opacity: 0.88;
 }
 
-/* Experience */
+/* Experience Entries */
 .exp-entry {
   margin-bottom: 36px;
 }
@@ -597,7 +596,7 @@ footer {
   fill: currentColor;
 }
 
-/* Responsive */
+/* Responsive Rules */
 @media (max-width: 768px) {
   .nav-container {
     padding: 0 20px;
@@ -637,13 +636,15 @@ footer {
     gap: 24px;
   }
   .pub-media {
-    justify-content: flex-start;
+    width: 100%;
+    justify-content: center;
   }
   .pub-cover-doc {
-    width: 160px;
+    width: 180px;
   }
   .pub-cover-chem {
-    width: 240px;
+    width: 100%;
+    max-width: 300px;
   }
   .quote-text {
     font-size: 1.7rem;
