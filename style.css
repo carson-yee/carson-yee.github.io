@@ -188,15 +188,18 @@ header {
   align-items: center;
 }
 
-/* Portrait with feathered gradient edges dissolving into the cream background */
+/* Portrait with feathered edges blending into the cream background */
 .hero-img {
   width: 100%;
-  max-width: 440px;
+  max-width: 420px;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   display: block;
-  -webkit-mask-image: radial-gradient(ellipse 80% 82% at 50% 50%, black 52%, transparent 98%);
-  mask-image: radial-gradient(ellipse 80% 82% at 50% 50%, black 52%, transparent 98%);
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, #000 50%, transparent 95%);
+  mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, #000 50%, transparent 95%);
 }
 
 /* Featured Links Cards (index.html) */
@@ -260,7 +263,7 @@ header {
   flex-grow: 1;
 }
 
-/* Featured Preview Thumbnail: 16:10 */
+/* Featured Preview Thumbnail: 16:10 with zero letterbox padding */
 .card-thumb {
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -268,7 +271,8 @@ header {
   border-radius: 2px;
   border: 1px solid var(--border);
   display: block;
-  background-color: var(--bg-light);
+  background: transparent;
+  padding: 0;
 }
 
 /* Quote Section */
@@ -332,7 +336,7 @@ header {
   overflow: hidden;
   border-radius: 3px;
   border: 1px solid var(--border);
-  background-color: #141110;
+  background-color: transparent;
   display: block;
   text-decoration: none;
 }
@@ -342,6 +346,7 @@ header {
   height: 100%;
   object-fit: cover;
   display: block;
+  padding: 0;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
@@ -381,7 +386,7 @@ header {
   line-height: 1.45;
 }
 
-/* Project Detail Pages Gallery Grid: Exactly 3 Items at 16:10 */
+/* Project Detail Pages Gallery Grid: Exactly 3 Columns at 16:10 */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -394,14 +399,15 @@ header {
   aspect-ratio: 16 / 10;
   height: auto;
   object-fit: cover;
-  background-color: var(--bg-light);
+  background-color: transparent;
   border-radius: 3px;
   border: 1px solid var(--border);
+  padding: 0;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
   display: block;
 }
 
-/* Secret Gallery Override (Untouched) */
+/* Secret Gallery Override (Preserved) */
 .secret-wrap {
   width: 100%;
   max-width: 1300px;
@@ -431,7 +437,7 @@ header {
 .pub-entry {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 36px;
   margin-bottom: 44px;
   padding-bottom: 36px;
@@ -466,30 +472,32 @@ header {
   margin-bottom: 16px;
 }
 
-/* Document Cover: Exact 816 x 1061 ratio */
+/* Document Cover: Proportional to 816 x 1061 */
 .pub-cover-doc {
-  width: 195px;
-  min-width: 195px;
+  width: 175px;
+  min-width: 175px;
   aspect-ratio: 816 / 1061;
   object-fit: cover;
   border: 1px solid var(--border);
   border-radius: 2px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  background-color: var(--bg-light);
+  background-color: transparent;
   display: block;
+  flex-shrink: 0;
 }
 
 /* Landscape Research Thumbnail: 16:10 */
-.pub-cover-landscape {
-  width: 320px;
-  min-width: 320px;
+.pub-cover-chem {
+  width: 240px;
+  min-width: 240px;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   border: 1px solid var(--border);
   border-radius: 2px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  background-color: var(--bg-light);
+  background-color: transparent;
   display: block;
+  flex-shrink: 0;
 }
 
 /* Buttons */
@@ -626,9 +634,12 @@ footer {
     gap: 20px;
     align-items: flex-start;
   }
-  .pub-cover-doc, .pub-cover-landscape {
-    width: 100%;
-    max-width: 300px;
+  .pub-cover-doc {
+    width: 160px;
+    min-width: unset;
+  }
+  .pub-cover-chem {
+    width: 220px;
     min-width: unset;
   }
   .quote-text {
