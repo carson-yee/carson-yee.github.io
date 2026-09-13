@@ -37,12 +37,19 @@
       </div>
 
       <div class="hero-bio">
-        <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--cardinal);">Overview & Engineering Scope</h2>
-        <p>
-          Developed for the MATE ROV Explorer Class competition, this project involved designing gear-driven four-bar linkage grippers in SolidWorks. Part geometries were toleranced to ensure reliable payload acquisition while accounting for thermal contraction and friction in cold freshwater conditions.
+        <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--cardinal);">Overview & Prototyping Scope</h2>
+        <p style="margin-bottom: 28px;">
+          Developed for the MATE ROV Explorer Class competition, this project focused on designing and prototyping custom end-effectors for subsea manipulation. The objective was to evaluate two distinct kinematic approaches, a synchronized gear linkage and a lead screw linear actuator, comparing part counts, mechanical viability, and actuation trade-offs prior to scaling the mechanisms to specific task requirements.
         </p>
+
+        <h3 style="font-size: 1.35rem; margin-bottom: 10px; color: var(--cardinal);">Prototype 1: Geared Linkage Gripper (Images 1 & 2)</h3>
+        <p style="margin-bottom: 28px;">
+          The first prototype prioritized mechanical simplicity and rapid iteration, focusing purely on gripper kinematics rather than fixed task dimensions. Modeled as a proportional 9-part assembly (top and bottom chassis plates, dual geared drive arms, linkage bars, spacers, and locating pins), the mechanism converts rotational input into synchronized pinch motion. Driving torque was applied directly to the primary gear, which engaged the opposing gear to close both jaws simultaneously.
+        </p>
+
+        <h3 style="font-size: 1.35rem; margin-bottom: 10px; color: var(--cardinal);">Prototype 2: Custom Lead-Screw Linear Gripper (Image 3)</h3>
         <p>
-          Iterative 3D printing in ABS and rapid prototyping cycles allowed the team to evaluate clamping force distribution, dynamic sealing integrity, and actuator torque limits.
+          The second iteration evaluated linear actuation to drive the jaws closed. The 12-part assembly centers on a custom chassis that guides a motor-driven lead screw, which translates a nut block forward and back to actuate L-shaped linkages. A flexible coupler links the motor shaft to the threaded rod, while integrated skateboard ball bearings and guide rails prevent side loading on the drive assembly. This iteration highlighted key engineering trade-offs, specifically mechanical friction losses and sourcing constraints for non-standard hardware.
         </p>
       </div>
     </div>
