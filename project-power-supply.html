@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variable AC-DC Power Supply | Carson Yee</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Math notation for this page only */
+    @font-face { font-family: 'Cormorant Symbols'; src: url('assets/CormorantSymbols.woff2') format('woff2'); font-weight: 400 700; font-style: normal; unicode-range: U+0394, U+03A9, U+03BC, U+2192, U+221A, U+2248; }
+    .eq-text { font-family: 'Cormorant Garamond', 'Cormorant Symbols', Garamond, Georgia, serif; font-variant-numeric: lining-nums; }
+    .eq-text var { font-style: italic; }
+    .eq-text sub { font-size: 0.72em; line-height: 0; position: relative; vertical-align: baseline; bottom: -0.3em; font-style: normal; }
+    .eq-text .eq { text-align: center; font-size: 1.35rem; margin: -4px 0 20px; }
+    .eq-text .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 0.12em; }
+    .eq-text .frac > span { line-height: 1.2; padding: 0 0.25em; }
+    .eq-text .frac > span:first-child { border-bottom: 1px solid currentColor; }
+    .eq-text .chain-arrow { color: var(--cardinal); padding: 0 0.15em; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">Carson Yee</a>
+      <div class="nav-center">
+        <a href="secret.html" aria-label="Secret Gallery" style="display: flex; align-items: center; justify-content: center; text-decoration: none;">
+          <svg class="tree-icon" viewBox="0 0 32 32" width="28" height="28" fill="#8c1515" xmlns="http://www.w3.org/2000/svg" aria-label="Redwood Emblem">
+          <path d="M16 2 L21 10 L18.5 10 L23.5 18 L20.5 18 L26 26 L17.5 26 L17.5 30 L14.5 30 L14.5 26 L6 26 L11.5 18 L8.5 18 L13.5 10 L11 10 Z"/>
+        </svg>
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="experience.html">Experience</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="section-band section-cream" style="flex: 1;">
+    <div class="content-wrap">
+      <a href="projects.html" style="text-decoration: none; color: var(--cardinal); font-size: 1rem;">← Back to Projects</a>
+      <h1 class="page-title" style="margin-top: 20px; margin-bottom: 8px;">Variable AC-DC Power Supply</h1>
+      <p class="section-sub" style="text-align: left; margin-bottom: 32px;">Analog Circuit Design &bull; Linear Power Supply</p>
+
+      <div class="gallery-grid" style="margin-bottom: 36px;">
+        <img src="assets/ConverterThumbnail.webp" alt="Completed power supply board" class="gallery-item">
+        <img src="assets/Converter2.webp" alt="Power supply component layout" class="gallery-item">
+        <img src="assets/Converter3.webp" alt="Solder side of the power supply board" class="gallery-item">
+      </div>
+
+      <div class="hero-bio eq-text">
+        <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--cardinal);">Overview</h2>
+        <p style="margin-bottom: 10px;">
+          An adjustable bench power supply that plugs into a wall outlet and outputs a steady 0–20&nbsp;V DC. It was built and tested one stage at a time, with each stage fixing a weakness of the one before it:
+        </p>
+        <ul class="exp-bullets" style="font-size: inherit; margin-bottom: 18px;">
+          <li>The transformer made wall power safe to work with.</li>
+          <li>The rectifier made it one polarity.</li>
+          <li>The capacitor smoothed it.</li>
+          <li>The Zener diode held it at a fixed 24&nbsp;V.</li>
+          <li>The potentiometer made it adjustable.</li>
+          <li>The MOSFET let it drive real loads without sagging.</li>
+        </ul>
+        <p style="margin-bottom: 28px;">
+          Signal chain: wall (120&nbsp;V AC) <span class="chain-arrow">&rarr;</span> transformer (≈24&nbsp;V AC) <span class="chain-arrow">&rarr;</span> bridge rectifier (pulsing DC) <span class="chain-arrow">&rarr;</span> filter capacitor (≈36&nbsp;V, small ripple) <span class="chain-arrow">&rarr;</span> Zener regulator (steady 24&nbsp;V) <span class="chain-arrow">&rarr;</span> potentiometer (0–24&nbsp;V setpoint) <span class="chain-arrow">&rarr;</span> MOSFET follower (0–20&nbsp;V that holds up under load).
+        </p>
+
+        <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--cardinal);">Stage-by-Stage Build</h2>
+
+        <h3 style="font-size: 1.35rem; margin-bottom: 10px; color: var(--cardinal);">Step-Down Transformer</h3>
+        <p>
+          A 24&nbsp;V AC wall adapter steps 120&nbsp;V down to about 24&nbsp;V rms. Alternating current in the primary coil creates a changing magnetic flux in the iron core. That flux induces a smaller voltage in the secondary coil, in proportion to the turns ratio. Because it relies on changing flux, a transformer passes AC but not DC. The peak voltage is:
+        </p>
+        <p class="eq"><var>V</var><sub>peak</sub> = <var>V</var><sub>rms</sub> × √2 ≈ 24&nbsp;V × 1.41 ≈ 34&nbsp;V</p>
+        <p style="margin-bottom: 28px;">
+          Unloaded, the adapter actually peaks near 39&nbsp;V, because adapters are rated at full load.
+        </p>
+
+        <h3 style="font-size: 1.35rem; margin-bottom: 10px; color: var(--cardinal);">Bridge Rectifier</h3>
+        <p>
+          Four diodes arranged in a diamond flip the negative half of each AC cycle positive, so current always leaves in the same direction. Each half-cycle passes through two diodes, so the output loses two diode drops and pulses at 120&nbsp;Hz instead of 60&nbsp;Hz:
+        </p>
+        <p class="eq" style="margin-bottom: 28px;"><var>V</var><sub>out</sub> ≈ |<var>V</var><sub>in</sub>| − 2<var>V</var><sub>D</sub> ≈ |<var>V</var><sub>in</sub>| − 1.4&nbsp;V</p>
+
+        <h3 style="font-size: 1.35rem; margin-bottom: 10px; color: var(--cardinal);">Filter Capacitor</h3>
+        <p>
+          A 1000&nbsp;μF capacitor charges to each peak and then supplies the load until the next one. This smooths the pulses into a nearly flat 36&nbsp;V or so. The small dip between peaks, called ripple, is roughly:
+        </p>
+        <p class="eq">Δ<var>V</var> ≈ <span class="frac"><span><var>I</var><sub>load</sub></span><span><var>f</var><var>C</var></span></span></p>
+        <p style="margin-bottom: 28px;">
+          With a 1&nbsp;kΩ test load drawing 36&nbsp;mA, that predicts 36&nbsp;mA ÷ (120&nbsp;Hz × 1000&nbsp;μF) ≈ 0.3&nbsp;V, and the measured ripple matched.
+        </p>
+
+        <h3 style="font-size: 1.35rem; margin-bottom: 10px; color: var(--cardinal);">Zener Regulator</h3>
+        <p>
+          A 24&nbsp;V Zener diode, mounted reverse-biased behind a 1&nbsp;kΩ resistor, holds the voltage at a steady 24&nbsp;V. In reverse breakdown, its voltage barely changes as its current changes, so it acts almost like a 24&nbsp;V source while the resistor absorbs the leftover ripple. The resistor also sets a current budget:
+        </p>
+        <p class="eq"><var>I</var> ≈ <span class="frac"><span>36&nbsp;V − 24&nbsp;V</span><span>1&nbsp;kΩ</span></span> ≈ 12&nbsp;mA</p>
+        <p style="margin-bottom: 28px;">
+          A load that needs more than that pulls the Zener out of regulation and the output sags. That’s why this stage alone can’t power much.
+        </p>
+
+        <h3 style="font-size: 1.35rem; margin-bottom: 10px; color: var(--cardinal);">Adjustable Output</h3>
+        <p>
+          A 10&nbsp;kΩ potentiometer across the Zener works as a voltage divider, setting the output anywhere from 0 to 24&nbsp;V, where <var>x</var> is the resistance between the wiper and ground:
+        </p>
+        <p class="eq"><var>V</var><sub>out</sub> = 24&nbsp;V × <span class="frac"><span><var>x</var></span><span>10&nbsp;kΩ</span></span></p>
+        <p style="margin-bottom: 28px;">
+          The catch is that the divider has over a kilohm of internal resistance, so any real load drags the voltage down.
+        </p>
+
+        <h3 style="font-size: 1.35rem; margin-bottom: 10px; color: var(--cardinal);">MOSFET Output Stage</h3>
+        <p>
+          An N-channel MOSFET wired as a source follower isolates the potentiometer from the load. The potentiometer drives the gate, and the output comes off the source one gate-source voltage lower:
+        </p>
+        <p class="eq"><var>V</var><sub>out</sub> = <var>V</var><sub>in</sub> − <var>V</var><sub>GS</sub></p>
+        <p>
+          With a threshold near 3&nbsp;V, the maximum output is about 20&nbsp;V. The insulated gate draws essentially no current, so the potentiometer is never loaded. Meanwhile, the output resistance is only about 1/<var>g</var><sub>m</sub>, which shrinks as current rises.
+        </p>
+        <p>
+          The drain connects to the 36&nbsp;V capacitor node rather than the Zener, because that node can supply far more than the Zener’s 12&nbsp;mA budget. Ripple there mostly doesn’t reach the output, since the MOSFET’s current is controlled by its gate, which sits on the clean Zener-regulated voltage. The trade-off is heat: the MOSFET drops <var>V</var><sub>DS</sub> = <var>V</var><sub>DD</sub> − <var>V</var><sub>out</sub>, so a low setting into a heavy load warms the transistor.
+        </p>
+        <p style="margin-bottom: 28px;">
+          A 470&nbsp;μF output capacitor smooths what’s left and covers sudden current demands. A 10&nbsp;kΩ resistor across the output keeps the MOSFET conducting slightly, so the output stays defined with no load attached.
+        </p>
+
+        <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--cardinal);">Results</h2>
+        <p style="margin-bottom: 28px;">
+          Set to 5&nbsp;V, the output only fell to 4.39&nbsp;V into a 100&nbsp;Ω load, a source resistance of about 14&nbsp;Ω. Without the MOSFET stage, the Zener-regulated 24&nbsp;V dropped to 11.5&nbsp;V into a lighter 470&nbsp;Ω load.
+        </p>
+
+        <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--cardinal);">Next Improvement</h2>
+        <p>
+          A shorted output would let the MOSFET pull as much current as the transformer can deliver, and it would overheat. A 1&nbsp;A fuse in series with the output is the simplest fix. A resettable option is an active current limit, where a small sense resistor turns on a transistor that pulls the gate down when current gets too high.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="http://www.linkedin.com/in/carsonyee777" target="_blank" rel="noopener" class="footer-icon" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+      </a>
+      <a href="https://github.com/carson-yee" target="_blank" rel="noopener" class="footer-icon" aria-label="GitHub">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+      <a href="mailto:carsony@stanford.edu" class="footer-icon" aria-label="Email">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </a>
+      <a href="secret.html" class="footer-icon" aria-label="Field Photography" title="Field Photography">
+        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
