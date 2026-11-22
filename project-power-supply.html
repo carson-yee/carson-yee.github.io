@@ -16,6 +16,10 @@
     .eq-text .frac > span { line-height: 1.2; padding: 0 0.25em; }
     .eq-text .frac > span:first-child { border-bottom: 1px solid currentColor; }
     .eq-text .chain-arrow { color: var(--cardinal); padding: 0 0.15em; }
+    .figure { margin: 4px 0 32px; }
+    .figure img { width: 100%; height: auto; display: block; border: 1px solid var(--border); border-radius: 3px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04); }
+    .figure figcaption { margin-top: 10px; text-align: center; font-size: 1.05rem; font-style: italic; color: var(--text-muted); line-height: 1.5; }
+    .figure .fig-label { font-style: normal; font-weight: 600; color: var(--cardinal); }
   </style>
 </head>
 <body>
@@ -125,6 +129,11 @@
         <p style="margin-bottom: 28px;">
           A 470&nbsp;μF output capacitor smooths what’s left and covers sudden current demands. A 10&nbsp;kΩ resistor across the output keeps the MOSFET conducting slightly, so the output stays defined with no load attached.
         </p>
+
+        <figure class="figure">
+          <img src="assets/ConverterSchematic.webp" alt="Schematic of the variable AC-DC power supply" width="1600" height="1000" loading="lazy">
+          <figcaption><span class="fig-label">Figure 1.</span> Variable AC-DC Power Supply Schematic</figcaption>
+        </figure>
 
         <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--cardinal);">Results</h2>
         <p style="margin-bottom: 28px;">
