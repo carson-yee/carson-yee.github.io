@@ -801,6 +801,22 @@ footer {
     break-after: avoid;
   }
 
+  /* Keep each heading with its first lines. Safari ignores break-after: avoid,
+     so the heading reserves space below itself: if that space doesn't fit on the
+     page, the heading moves to the next page along with its text. */
+  .hero-bio h2,
+  .hero-bio h3 {
+    break-inside: avoid;
+  }
+
+  .hero-bio h2::after,
+  .hero-bio h3::after {
+    content: "";
+    display: block;
+    height: 4.5em;
+    margin-bottom: -4.5em;
+  }
+
   .hero-bio p,
   .hero-bio ul {
     margin-bottom: 6pt !important;
