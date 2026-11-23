@@ -58,7 +58,7 @@
       <div class="hero-bio eq-text">
         <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--cardinal);">Overview</h2>
         <p style="margin-bottom: 10px;">
-          An adjustable bench power supply that plugs into a wall outlet and outputs a steady 0–20&nbsp;V DC. It was built and tested one stage at a time, with each stage fixing a weakness of the one before it:
+          A variable linear power supply that plugs into a wall outlet and outputs an adjustable 0–20&nbsp;V DC. It was built and tested one stage at a time, with each stage fixing a weakness of the one before it:
         </p>
         <ul class="exp-bullets" style="font-size: inherit; margin-bottom: 18px;">
           <li>The transformer made wall power safe to work with.</li>
@@ -66,10 +66,10 @@
           <li>The capacitor smoothed it.</li>
           <li>The Zener diode held it at a fixed 24&nbsp;V.</li>
           <li>The potentiometer made it adjustable.</li>
-          <li>The MOSFET let it drive real loads without sagging.</li>
+          <li>The MOSFET let it drive real loads with far less sag.</li>
         </ul>
         <p style="margin-bottom: 28px;">
-          Signal chain: wall (120&nbsp;V AC) <span class="chain-arrow">&rarr;</span> transformer (≈24&nbsp;V AC) <span class="chain-arrow">&rarr;</span> bridge rectifier (pulsing DC) <span class="chain-arrow">&rarr;</span> filter capacitor (≈36&nbsp;V, small ripple) <span class="chain-arrow">&rarr;</span> Zener regulator (steady 24&nbsp;V) <span class="chain-arrow">&rarr;</span> potentiometer (0–24&nbsp;V setpoint) <span class="chain-arrow">&rarr;</span> MOSFET follower (0–20&nbsp;V that holds up under load).
+          Signal chain: wall (120&nbsp;V AC) <span class="chain-arrow">&rarr;</span> transformer (≈24&nbsp;V AC) <span class="chain-arrow">&rarr;</span> bridge rectifier (pulsing DC) <span class="chain-arrow">&rarr;</span> filter capacitor (≈36&nbsp;V, small ripple) <span class="chain-arrow">&rarr;</span> Zener regulator (≈24&nbsp;V) <span class="chain-arrow">&rarr;</span> potentiometer (0–24&nbsp;V setpoint) <span class="chain-arrow">&rarr;</span> MOSFET follower (0–20&nbsp;V that sags far less under load).
         </p>
 
         <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--cardinal);">Stage-by-Stage Build</h2>
@@ -85,9 +85,12 @@
 
         <h3 style="font-size: 1.35rem; margin-bottom: 10px; color: var(--cardinal);">Bridge Rectifier</h3>
         <p>
-          Four diodes arranged in a diamond flip the negative half of each AC cycle positive, so current always leaves in the same direction. Each half-cycle passes through two diodes, so the output loses two diode drops and pulses at 120&nbsp;Hz instead of 60&nbsp;Hz:
+          Four 1N4002 diodes arranged in a diamond flip the negative half of each AC cycle positive, so current always leaves in the same direction. The output pulses at 120&nbsp;Hz instead of 60&nbsp;Hz, and because each half-cycle passes through two diodes, each peak is two diode drops lower:
         </p>
-        <p class="eq" style="margin-bottom: 28px;"><var>V</var><sub>out</sub> ≈ |<var>V</var><sub>in</sub>| − 2<var>V</var><sub>D</sub> ≈ |<var>V</var><sub>in</sub>| − 1.4&nbsp;V</p>
+        <p class="eq"><var>V</var><sub>out,peak</sub> ≈ <var>V</var><sub>in,peak</sub> − 2<var>V</var><sub>D</sub></p>
+        <p style="margin-bottom: 28px;">
+          The 0.7&nbsp;V diode model predicts a 1.4&nbsp;V loss. Measured, the peak fell from 39.3&nbsp;V to 37.2&nbsp;V into a 10&nbsp;kΩ load, about 2.1&nbsp;V. Near each zero crossing, while the input is below 2<var>V</var><sub>D</sub>, the diodes stay off and the output sits at 0&nbsp;V.
+        </p>
 
         <h3 style="font-size: 1.35rem; margin-bottom: 10px; color: var(--cardinal);">Filter Capacitor</h3>
         <p>
@@ -95,12 +98,12 @@
         </p>
         <p class="eq">Δ<var>V</var> ≈ <span class="frac"><span><var>I</var><sub>load</sub></span><span><var>f</var><var>C</var></span></span></p>
         <p style="margin-bottom: 28px;">
-          With a 1&nbsp;kΩ test load drawing 36&nbsp;mA, that predicts 36&nbsp;mA ÷ (120&nbsp;Hz × 1000&nbsp;μF) ≈ 0.3&nbsp;V, and the measured ripple matched.
+          Here <var>f</var> is the 120&nbsp;Hz ripple frequency, twice the 60&nbsp;Hz line frequency. With a 1&nbsp;kΩ test load drawing 36&nbsp;mA, that predicts 36&nbsp;mA ÷ (120&nbsp;Hz × 1000&nbsp;μF) ≈ 0.3&nbsp;V, and the measured ripple matched.
         </p>
 
         <h3 style="font-size: 1.35rem; margin-bottom: 10px; color: var(--cardinal);">Zener Regulator</h3>
         <p>
-          A 24&nbsp;V Zener diode, mounted reverse-biased behind a 1&nbsp;kΩ resistor, holds the voltage at a steady 24&nbsp;V. In reverse breakdown, its voltage barely changes as its current changes, so it acts almost like a 24&nbsp;V source while the resistor absorbs the leftover ripple. The resistor also sets a current budget:
+          A 1N4749A 24&nbsp;V Zener diode, mounted reverse-biased behind a 1&nbsp;kΩ resistor, holds the voltage near 24&nbsp;V (measured 24.4&nbsp;V). In reverse breakdown, its voltage barely changes as its current changes, so it acts almost like a 24&nbsp;V source while the resistor absorbs the leftover ripple. The resistor also sets a current budget:
         </p>
         <p class="eq"><var>I</var> ≈ <span class="frac"><span>36&nbsp;V − 24&nbsp;V</span><span>1&nbsp;kΩ</span></span> ≈ 12&nbsp;mA</p>
         <p style="margin-bottom: 28px;">
@@ -113,22 +116,22 @@
         </p>
         <p class="eq"><var>V</var><sub>out</sub> = 24&nbsp;V × <span class="frac"><span><var>x</var></span><span>10&nbsp;kΩ</span></span></p>
         <p style="margin-bottom: 28px;">
-          The catch is that the divider has over a kilohm of internal resistance, so any real load drags the voltage down.
+          The catch is the divider’s own output resistance: <var>x</var> in parallel with 10&nbsp;kΩ&nbsp;−&nbsp;<var>x</var>. It is near zero at either end of the range and peaks at 2.5&nbsp;kΩ in the middle. At the 5&nbsp;V setting it measured about 1.6&nbsp;kΩ, so a 470&nbsp;Ω load dragged the output from 5.00&nbsp;V down to 1.13&nbsp;V.
         </p>
 
         <h3 style="font-size: 1.35rem; margin-bottom: 10px; color: var(--cardinal);">MOSFET Output Stage</h3>
         <p>
-          An N-channel MOSFET wired as a source follower isolates the potentiometer from the load. The potentiometer drives the gate, and the output comes off the source one gate-source voltage lower:
+          An IRF530A N-channel MOSFET wired as a source follower isolates the potentiometer from the load. The potentiometer drives the gate, and the output comes off the source one gate-source voltage lower:
         </p>
         <p class="eq"><var>V</var><sub>out</sub> = <var>V</var><sub>in</sub> − <var>V</var><sub>GS</sub></p>
         <p>
-          With a threshold near 3&nbsp;V, the maximum output is about 20&nbsp;V. The insulated gate draws essentially no current, so the potentiometer is never loaded. Meanwhile, the output resistance is only about 1/<var>g</var><sub>m</sub>, which shrinks as current rises.
+          <var>V</var><sub>GS</sub> is the roughly 3&nbsp;V threshold plus an overdrive that grows with current, <var>V</var><sub>GS</sub> = <var>V</var><sub>t</sub> + √(2<var>I</var><sub>D</sub>/<var>k</var>). That caps the output at about 20&nbsp;V and is why it still sags somewhat under heavy loads. The insulated gate draws essentially no current, so the potentiometer is never loaded. Meanwhile, the output resistance is only about 1/<var>g</var><sub>m</sub>, which shrinks as current rises.
         </p>
         <p>
           The drain connects to the 36&nbsp;V capacitor node rather than the Zener, because that node can supply far more than the Zener’s 12&nbsp;mA budget. Ripple there mostly doesn’t reach the output, since the MOSFET’s current is controlled by its gate, which sits on the clean Zener-regulated voltage. The trade-off is heat: the MOSFET drops <var>V</var><sub>DS</sub> = <var>V</var><sub>DD</sub> − <var>V</var><sub>out</sub>, so a low setting into a heavy load warms the transistor.
         </p>
         <p style="margin-bottom: 28px;">
-          A 470&nbsp;μF output capacitor smooths what’s left and covers sudden current demands. A 10&nbsp;kΩ resistor across the output keeps the MOSFET conducting slightly, so the output stays defined with no load attached.
+          A 470&nbsp;μF output capacitor smooths what’s left and covers sudden current demands. A 10&nbsp;kΩ resistor across the output keeps the MOSFET conducting slightly, so the output stays defined with no load attached. It also bleeds charge off the output capacitor, so the output actually falls when the potentiometer is turned down.
         </p>
 
         <figure class="figure">
@@ -138,12 +141,12 @@
 
         <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--cardinal);">Results</h2>
         <p style="margin-bottom: 28px;">
-          Set to 5&nbsp;V, the output only fell to 4.39&nbsp;V into a 100&nbsp;Ω load, a source resistance of about 14&nbsp;Ω. Without the MOSFET stage, the Zener-regulated 24&nbsp;V dropped to 11.5&nbsp;V into a lighter 470&nbsp;Ω load.
+          At the 5&nbsp;V setting, the MOSFET stage cut the source resistance from about 1.6&nbsp;kΩ to about 14&nbsp;Ω. Before it, a 470&nbsp;Ω load pulled the output from 5.00&nbsp;V to 1.13&nbsp;V. After it, a heavier 100&nbsp;Ω load pulled the output to 4.39&nbsp;V, a 12% drop. At the 10&nbsp;V setting, the same load pulled it to 9.45&nbsp;V, a source resistance of about 5.8&nbsp;Ω, consistent with the output resistance shrinking as current rises. Output ripple stayed between 20 and 60&nbsp;mV. Because a source follower has no feedback, the output still sags noticeably at low settings under heavy loads.
         </p>
 
         <h2 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--cardinal);">Next Improvement</h2>
         <p>
-          A shorted output would let the MOSFET pull as much current as the transformer can deliver, and it would overheat. A 1&nbsp;A fuse in series with the output is the simplest fix. A resettable option is an active current limit, where a small sense resistor turns on a transistor that pulls the gate down when current gets too high.
+          A shorted output would let the MOSFET pull as much current as the 36&nbsp;V node can supply. The MOSFET would overheat, and drawing more than the wall adapter’s 1&nbsp;A rating would overheat the transformer too. A 1&nbsp;A fuse in series with the output is the simplest fix, though the 1000&nbsp;μF capacitor can still dump a brief surge into the MOSFET before the fuse blows. A resettable option is an active current limit, where a small sense resistor turns on a transistor that pulls the gate down when current gets too high. In a sustained short, that limit still leaves the MOSFET dissipating up to about 36&nbsp;W, so it would also need a heatsink or foldback limiting, which cuts the current further once the output is shorted.
         </p>
       </div>
     </div>
